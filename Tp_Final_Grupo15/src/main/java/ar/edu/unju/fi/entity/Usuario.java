@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "usuarios")
 public class Usuario {
 
-	@Id
+    @Id
     @Column(name = "usuario_identificador")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long identificador;
@@ -55,8 +56,9 @@ public class Usuario {
 	private String telefono;
 	
 	@Column(name = "usuario_estatura")
-	@NotEmpty(message="Debes introducir una estatura")
+	@NotNull(message="Debe introducir su estatura")
 	@Positive(message="La estatura debe ser un valor positivo")
+	@Max(value=3, message="La estatura puede ser como máximo de 3 metros")
 	private float estatura;
 	
 	@Column(name = "usuario_sexo")
@@ -69,7 +71,7 @@ public class Usuario {
 	private LocalDate fechaNacimiento;
 
 	public Usuario() {
-		
+		this.setEstado(true);
 	}
 
 	public Usuario(long identificador, boolean estado,
@@ -80,7 +82,6 @@ public class Usuario {
 			float estatura,
 			String sexo,
 			LocalDate fechaNacimiento) {
-		super();
 		this.identificador = identificador;
 		this.estado = estado;
 		this.nombre = nombre;
