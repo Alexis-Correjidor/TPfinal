@@ -1,8 +1,8 @@
 # Programación Visual - TPfinal
 
-Grupo15
+# Grupo15
 
-Integrantes:
+# Integrantes:
 
 - Castellon, Agustin Miqueas
 - Correjidor, Alexis Gabriel
