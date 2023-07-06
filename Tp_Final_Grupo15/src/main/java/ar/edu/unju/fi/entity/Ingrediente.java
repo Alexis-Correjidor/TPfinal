@@ -30,10 +30,21 @@ public class Ingrediente {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingrediente(Long id, String nombre) {
+	public Ingrediente(Long id, String nombre, Receta receta) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.receta = receta;
+	}
+
+	
+	
+	public Receta getReceta() {
+		return receta;
+	}
+
+	public void setReceta(Receta receta) {
+		this.receta = receta;
 	}
 
 	public Long getId() {
