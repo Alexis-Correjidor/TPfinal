@@ -34,4 +34,22 @@ public class IngredienteServiceImp implements IIngredienteService{
 		return ingrediente;
 	}
 
+	@Override
+	public void addIngrediente(Ingrediente ingrediente) {
+		ingredienteRepository.save(ingrediente);
+		
+	}
+
+	@Override
+	public void modifyIngrediente(Ingrediente ingrediente) {
+		ingredienteRepository.save(ingrediente);
+		
+	}
+
+	@Override
+	public void deleteIngrediente(Ingrediente ingrediente) {
+		
+		
+	}
+
 }

@@ -8,6 +8,7 @@ import ar.edu.unju.fi.entity.Receta;
 @Service
 public interface IRecetaService {
 	public List<Receta> getList(String categoria);
+	public List<Receta> getAllRecetas();
 	public Receta getRecetaById(Long id);
 	public Receta getReceta();
 	public void addReceta(Receta receta);

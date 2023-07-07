@@ -48,4 +48,10 @@ public class RecetaServiceImp implements IRecetaService{
 		return recetaRepository.findByCategory(categoria);
 	}
 
+	@Override
+	public List<Receta> getAllRecetas() {
+		List<Receta> recetas = (List<Receta>)recetaRepository.findAll();
+		return recetas;
+	}
+
 }

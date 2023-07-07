@@ -103,7 +103,7 @@ BindingResult result,
 				recetaService.addReceta(receta);
 				
 				mav = new ModelAndView("listaRecetas");
-				mav.addObject("recetas", recetaService.getList(getRecetaPage()));
+				mav.addObject("recetas", recetaService.getAllRecetas());
 		}
 		return mav;
 		

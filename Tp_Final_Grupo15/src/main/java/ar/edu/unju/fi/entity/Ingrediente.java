@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.entity;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -24,28 +26,29 @@ public class Ingrediente {
 	private String nombre;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "rec_id")
-	private Receta receta;
+	private List<Receta> recetas;
 	
 	public Ingrediente() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingrediente(Long id, String nombre, Receta receta) {
+	public Ingrediente(Long id, String nombre, List<Receta> recetas) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.receta = receta;
+		this.recetas = recetas;
 	}
 
-	
-	
-	public Receta getReceta() {
-		return receta;
+
+	public List<Receta> getRecetas() {
+		return recetas;
 	}
 
-	public void setReceta(Receta receta) {
-		this.receta = receta;
+
+	public void setRecetas(List<Receta> recetas) {
+		this.recetas = recetas;
 	}
+
 
 	public Long getId() {
 		return id;
