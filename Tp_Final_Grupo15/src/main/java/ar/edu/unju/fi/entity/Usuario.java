@@ -34,14 +34,12 @@ public class Usuario {
     private boolean estado;
 	
 	@Column(name = "usuario_nombre")
-	@NotEmpty(message = "Debes introducir un nombre")
-	@Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres")
-	@Pattern(regexp = "[a-z A-Z]+", message = "Debe contener solo letras")
+	@Size(min = 3, max = 30, message = "Ingrese un nombre entre 3 y 30 caracteres")
+	@Pattern(regexp = "[a-z A-Z]+", message = "El nombre debe contener solo letras")
 	private String nombre;
 
 	@Column(name = "usuario_apellido")
-	@NotEmpty(message = "Debes introducir un apellido")
-	@Size(min = 4, max = 30, message = "El apellido solo puede contener entre 4 y 30 caracteres")
+	@Size(min = 4, max = 30, message = "Ingrese un apellido entre 4 y 30 caracteres")
 	@Pattern(regexp = "[a-z A-Z]+", message = "Debe contener solo letras")
 	private String apellido;
 	
@@ -51,12 +49,10 @@ public class Usuario {
 	private String email;
 	
 	@Column(name = "usuario_telefono")
-	@NotBlank(message="Debes introducir un teléfono")
-	@Pattern(regexp = "[0-9]+", message = "El telefono debe contener solo números")
+	@Pattern(regexp = "[0-9]+", message = "Ingrese un teléfono usando solo números")
 	private String telefono;
 	
 	@Column(name = "usuario_estatura")
-	@NotNull(message="Debe introducir su estatura")
 	@Positive(message="La estatura debe ser un valor positivo")
 	@Max(value=3, message="La estatura puede ser como máximo de 3 metros")
 	private float estatura;

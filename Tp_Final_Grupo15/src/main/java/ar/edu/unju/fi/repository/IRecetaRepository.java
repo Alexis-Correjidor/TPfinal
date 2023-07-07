@@ -8,6 +8,6 @@ import ar.edu.unju.fi.entity.Receta;
 
 public interface IRecetaRepository extends CrudRepository<Receta, Long>  {
 
-	public List<Receta> findByCategory(String nombre);
+	public List<Receta> findByCategoria(String nombre);
 	
 }
