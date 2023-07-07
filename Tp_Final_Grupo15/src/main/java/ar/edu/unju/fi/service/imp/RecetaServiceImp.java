@@ -45,7 +45,7 @@ public class RecetaServiceImp implements IRecetaService{
 
 	@Override
 	public List<Receta> getList(String categoria) {
-		return recetaRepository.findByCategory(categoria);
+		return recetaRepository.findByCategoria(categoria);
 	}
 
 	@Override

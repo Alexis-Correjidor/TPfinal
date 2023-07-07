@@ -10,8 +10,10 @@ import java.util.UUID;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public class UploadFile {
 	private final static String UPLOADS_FOLDER = "src/main/resources/static/uploads";
 	
