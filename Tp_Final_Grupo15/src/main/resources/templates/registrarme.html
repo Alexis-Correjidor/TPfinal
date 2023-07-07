@@ -16,39 +16,46 @@
 			<h2 class="active">Registrate</h2>
 			<p>Registrandote podras acceder a los distintos servicios que ofrece nuestra página</p>
 		</div>
-			<form th:action="@{/inicio}">
+			<form th:action="@{/registrarme/guardar}" th:object="${usuario}" method="post">
 				<div class="row justify-content-center">
 					<div class="col-3">
 						<label class="col-form-label" for="nombre">Nombre</label>
-						<input class="form-control" type="text" id="nombre" name="usuario_nombre">
+						<input class="form-control" type="text" id="nombre" name="usuario_nombre" th:field="*{nombre}">
+						<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 					</div>
 					<div class="col-3">
 						<label class="col-form-label" for="apellido">Apellido</label>
-						<input class="form-control" type="text" id="apellido" name="usuario_apellido">
+						<input class="form-control" type="text" id="apellido" name="usuario_apellido" th:field="*{apellido}">
+						<div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
 					</div> <p>
 					<div class="col-6">
 						<label class="col-form-label" for="email">Email</label>
-						<input class="form-control" type="email" id="email" name="usuario_email">
+						<input class="form-control" type="email" id="email" name="usuario_email" th:field="*{email}">
+						<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 					</div> <p>
 					<div class="col-3">
 						<label class="col-form-label" for="telefono">Teléfono</label>
-						<input class="form-control" type="text" id="telefono" name="usuario_telefono">
+						<input class="form-control" type="text" id="telefono" name="usuario_telefono" th:field="*{telefono}">
+						<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
 					</div> 
 					<div class="col-3">
 						<label class="col-form-label" for="estatura">Estatura</label>
-						<input class="form-control" type="number" id="estatura" name="usuario_estatura" step=".01">
+						<input class="form-control" type="number" id="estatura" name="usuario_estatura" step=".01" th:field="*{estatura}">
+						<div class="text-danger" th:if="${#fields.hasErrors('estatura')}" th:errors="*{estatura}"></div>
 					</div><p>
 					<div class="col-3">
 						<label class="col-form-label" for="sexo">Sexo</label>
-						<select id="sexo" class="form-select" name="usuario_sexo" aria-label="Default select-example">
+						<select id="sexo" class="form-select" name="usuario_sexo" aria-label="Default select-example" th:field="*{sexo}">
 							<option selected value="">Seleccione su sexo</option>
 							<option value="Masculino">Masculino</option>
 							<option value="Femenino">Femenino</option>
 						</select>
+						<div class="text-danger" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></div>
 					</div>
 					<div class="col-3">
 						<label class="col-form-label" for="nacimiento">Fecha de Nacimiento</label>
-						<input class="form-control" type="date" id="nacimiento" name="usuario_nacimiento">
+						<input class="form-control" type="date" id="nacimiento" name="usuario_nacimiento" th:field="*{fechaNacimiento}">
+						<div class="text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
 					</div> <p>
 					<div class="col-6 text-center mb-4">
 						<input type="submit" value="Registrarte" class="btn btn-success btn-lg btn-block mt-3" style="width:100%" />
