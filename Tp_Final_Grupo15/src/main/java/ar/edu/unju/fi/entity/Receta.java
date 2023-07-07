@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 @Component
 @Entity
@@ -24,8 +23,7 @@ public class Receta {
 	private String nombre;
 	@Column(name = "rec_categoria")
 	private String categoria;
-	@OneToMany(cascade = CascadeType.ALL,
-				mappedBy = "receta")
+	@ManyToMany(mappedBy = "recetas")
 	private List<Ingrediente> ingredientes;
 	@Column(name = "rec_preparacion")
 	private String preparacion;

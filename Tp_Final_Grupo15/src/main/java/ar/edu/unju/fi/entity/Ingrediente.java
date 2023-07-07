@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.entity;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -8,8 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Component
@@ -22,9 +23,8 @@ public class Ingrediente {
 	private Long id;
 	@Column(name = "ing_nombre")
 	private String nombre;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rec_id")
-	private Receta receta;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Receta> recetas;
 	
 	public Ingrediente() {
 		// TODO Auto-generated constructor stub
