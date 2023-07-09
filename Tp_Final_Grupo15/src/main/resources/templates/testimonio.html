@@ -14,37 +14,35 @@
 	<header th:replace="~{layouts/header :: header}"></header>
 		<div class="container mt-5">
 			<h3 class="text-start active">Nuevo Testimonio</h3>
-			<p class="text-white">Para ingresar un nuevo testimonio, debe ingresar su codigo de usuario:</p>
+			<p class="text-white">Para agregar un nuevo testimonio, debe ingresar su codigo de usuario:</p>
 		<form class="row g-3">
 			  <div class="col-auto">
 			    <label for="inputPassword2" class="visually-hidden">Codigo</label>
 			    <input type="codigo" class="form-control" id="inputPassword2" placeholder="Codigo">
 			  </div>
 			  <div class="col-auto">
-			    <button type="submit" class="btn btn-outline-light mb-3">Confirmar Identidad</button>
+			    <a type="submit" class="btn btn-outline-light mb-3" th:object="${usu}" th:href="@{/testimonio/nuevo}" >Confirmar Identidad</a>
 			  </div>
 		</form>
 		
-		<div class="row d-flex justify-content-start m-5">
-		    <div class="col-md-4">
+		<div class="row d-flex justify-content-start m-5" >
+		    <div class="col-md-4" th:each="testi: ${testimonio}">
 		      <div class="card border-warning">
 		        <div class="card-body m-3">
 		          <div class="row">
-		            <div class="col-lg-12">
-		              <p class="text-muted fw-light mb-4">
-		                He perdido los kilos que queria comiendo más habitualmente y aprendi a cocinar
-		                recetas buenisimas que me proporcionasteis y muchos trucos de los cuales
-		                pongo en práctica para no recuperarlos. Muchas gracias.
-		              </p>
+		            <div class="col-lg-12" >
+		              <p class="text-muted fw-light mb-4" th:text="${testi.comentario}"></p>
 		               <div class="col-lg-12 d-flex justify-content-start align-items-end mb-4 mb-lg-0">
 		              <img th:src="@{/images/avatar.jpg}"
 		                class="rounded-circle img-fluid shadow-1" alt="avatar" width="75" height="75" />
-		                <p class="fw-bold lead "><strong>Miriam</strong></p>
+		                <p class="fw-bold lead " th:text="${testi.usuario}"></p>
 		            </div>
 		            </div>
 		          </div>
 		        </div>
 		      </div>
+			      <a class="btn btn-outline-success" th:href="@{/testimonio/modificar/}+${sucu.id}">Editar</a>
+				  <a class="btn btn-outline-danger" th:href="@{/testimonio/eliminar/}+${sucu.id}">Eliminar</a>
 		    </div>
 		  </div>
 		</div>
