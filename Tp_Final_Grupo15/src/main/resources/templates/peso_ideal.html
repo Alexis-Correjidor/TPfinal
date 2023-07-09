@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Inicio</title>
+		<link rel="stylesheet" type="text/css"
+		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+	</head>
+<body>
+    
+	<header th:replace="~{layouts/header :: header}"></header>
+		
+		<div class="container">
+			<div class="text-center">
+					<h2 class="active">Peso ideal</h2>
+					<p class="text-white">Para calcular su peso ideal según su estatura y edad, debe ingresar su codigo de usuario:</p>
+					<form class="row g-3 justify-content-md-center" th:action="@{/servicio/peso_ideal}" method="post">
+					  <div class="col-auto">
+					    <label for="identificador" class="visually-hidden">Codigo</label>
+					 <input type="number" class="form-control" name="identificador" id="identificador" placeholder="Codigo" required>
+					</div>
+					<div class="col-auto">
+					<button type="submit" class="btn btn-outline-light mb-3">Confirmar Identidad</button>
+					</div>
+					</form>
+					<div th:if="${usuario}!=null">
+						<h3 class="active" ></h3>
+						<div  class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
+							  style="background-image: url('/images/peso_ideal.png'); background-position: center;
+							  background-size: cover;">
+							  <h1 class="mb-3 h2" th:text="'¡Hola,'+'  '+${usuario.apellido}+'  '+${usuario.nombre}+'!'"></h1>
+							
+							  <h4 th:text="'Tu peso ideal es de: '+${peso_ideal}+' kg'"></h4>
+							  <p>
+							  	Recuerde, el camino para una vida saludable es un proceso gradual. Cada pequeño paso que das cuenta y te acerca a tu objetivo.
+							  </p>
+						</div>
+					</div>
+					<div th:if="${encontrado}==false">
+						<h3 class="active">Lo sentimos, no se encontró un usuario con el codigo de usuario ingresado</h3>
+					</div>
+			</div>	
+		</div>
+		
+		
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

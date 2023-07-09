@@ -164,5 +164,17 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	
+	public int getEdad() { //retorna la edad del usuario segun su fecha de nacimiento
+		int dia=this.fechaNacimiento.getDayOfMonth(), mes=this.fechaNacimiento.getMonthValue();
+		if (LocalDate.now().getMonthValue()<mes)
+			return (LocalDate.now().getYear()-this.fechaNacimiento.getYear())-1;
+		if (LocalDate.now().getDayOfMonth()<dia && LocalDate.now().getMonthValue()==mes)
+			return (LocalDate.now().getYear()-this.fechaNacimiento.getYear())-1;
+		else
+			return LocalDate.now().getYear()-this.fechaNacimiento.getYear();
+	}
 	
+	public double getPesoIdeal() { //retorna el peso ideal
+		return this.getEstatura()*100-100+((this.getEdad()/10)*0.9);
+	}
 }

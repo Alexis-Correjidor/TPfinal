@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class UsuarioServiceImp implements IUsuarioService {
 
 	@Override
 	public Usuario getById(long identificador) {
-		return usuarioRepository.findById(identificador).get();
+	    Optional<Usuario> optionalUsuario = usuarioRepository.findById(identificador);
+	    return optionalUsuario.orElse(null);
 	}
 
 	@Override
