@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Estas registrado!</title>
+		<link rel="stylesheet" type="text/css"
+		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+	</head>
+<body>
+    
+	<header th:replace="~{layouts/header :: header}"></header>
+	
+		<div class="container text-white my-5">
+			<h1 class="active text-center">Felcidades!! Ya estas registrado</h1>
+			<p class="text-center">Usando tu código de usuario puedes acceder a los servicios que ofrece nuestra página</p>
+			<h2 class="active text-center">Estos son tus datos:</h2>
+			<div class="row justify-content-center">
+				<div class="card mb-3 text-black mt-3" style="max-width: 540px;">
+					  <div class="row g-0">
+					    <div class="col-md-4 d-flex align-items-center">
+							<img th:src="@{/images/avatar.jpg}" class="img-fluid rounded-start">
+						</div>
+					    <div class="col-md-8">
+					      <div class="card-body">
+					      	<div class="row">
+						        <h5 class="card-title" th:text="'Codigo de usuario: '+${usuario.identificador}"></h5>						        
+								  <span><small class="text-muted">Apellido y nombre: </small></span>
+								  <p th:text="${usuario.apellido}+'  '+${usuario.nombre}"></p>
+								  <div class="col-5">
+									  <span><small class="text-muted">Estatura: </small></span>
+									  <p th:text="${usuario.estatura}"></p>
+								</div>
+								<div class="col-7">	
+									  <span><small class="text-muted">Sexo: </small></span>
+									  <p th:text="${usuario.sexo}"></p>
+								</div>
+							</div>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+			</div>	
+		</div>
+		
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

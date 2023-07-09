@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -39,8 +40,8 @@ public class Usuario {
 	private String nombre;
 
 	@Column(name = "usuario_apellido")
-	@Size(min = 4, max = 30, message = "Ingrese un apellido entre 4 y 30 caracteres")
-	@Pattern(regexp = "[a-z A-Z]+", message = "Debe contener solo letras")
+	@Size(min = 3, max = 30, message = "Ingrese un apellido entre 3 y 30 caracteres")
+	@Pattern(regexp = "[a-z A-Z]+", message = "El apellido debe contener solo letras")
 	private String apellido;
 	
 	@Column(name = "usuario_email")
@@ -50,10 +51,12 @@ public class Usuario {
 	
 	@Column(name = "usuario_telefono")
 	@Pattern(regexp = "[0-9]+", message = "Ingrese un teléfono usando solo números")
+	@Size(min = 7, message = "Ingrese un teléfono de mínimo 7 dígitos")
 	private String telefono;
 	
 	@Column(name = "usuario_estatura")
 	@Positive(message="La estatura debe ser un valor positivo")
+	@DecimalMin(value = "0.40", message = "La estatura puede ser como mínimo de 0.40")
 	@Max(value=3, message="La estatura puede ser como máximo de 3 metros")
 	private float estatura;
 	
