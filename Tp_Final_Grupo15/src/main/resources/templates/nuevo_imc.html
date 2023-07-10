@@ -11,24 +11,48 @@
 	</head>
 <body>
 	<header th:replace="~{layouts/header :: header}"></header>
-	<div class="container text-white">
+	<div class="container text-white my-4">
 		<div class="text-center">
 			<h2 class="active">Nuevo Índice de masa corporal</h2>
 			<p>Ingrese su peso para calcular su Imc</p>
 		</div>
-		<form class="row g-3 justify-content-md-center" th:action="@{/servicio/calcular_imc/guardar}" th:object="${imc}" method="post">
-			<div class="col-auto">
-				<label for="peso" class="visually-hidden">Peso</label>
-				<input type="number" class="form-control" name="peso" id="peso" step=".01" min="1" placeholder="Peso actual en Kg" required>
-			</div>
-			<div class="col-auto">
-				<label for="identificador" class="visually-hidden">Identificador</label>
-				<input type="hidden" class="form-control" name="usuario_identificador" id="identificador" th:field="*{usuario.identificador}" readonly>
-			</div>
-			<div class="col-auto">
-					<button type="submit" class="btn btn-outline-light mb-3">Calcular Imc</button>
-			</div>
-		</form>
+		<div th:if="${editar}==false">
+			<form class="row g-3 justify-content-md-center" th:action="@{/servicio/calcular_imc/guardar}" th:object="${imc}" method="post">
+				<div class="col-auto">
+					<label for="peso" class="visually-hidden">Peso</label>
+					<input type="number" class="form-control" name="peso" id="peso" step=".01" min="1" placeholder="Peso actual en Kg" required>
+				</div>
+				<div class="col-auto">
+					<label for="identificador" class="visually-hidden">Identificador</label>
+					<input type="hidden" class="form-control" name="usuario_identificador" id="identificador" th:field="*{usuario.identificador}" readonly>
+				</div>
+				<div class="col-auto">
+						<button type="submit" class="btn btn-outline-light mb-3">Calcular Imc</button>
+				</div>
+			</form>
+		</div>
+		<div th:if="${editar}">
+			<form class="row g-3 justify-content-md-center" th:action="@{/servicio/calcular_imc/guardar}" th:object="${imc}" method="post">
+				<div class="col-1">
+					<input type="hidden" class="form-control" name="imc_identificador" id="identificador" min="1" th:field="*{identificador}" required>
+				</div>
+				<div class="col-1">
+					<label for="peso" >Peso</label>
+					<input type="number" class="form-control" name="imc_peso" id="peso" step=".01" min="1" placeholder="Peso actual en Kg" th:field="*{peso}" required>
+				</div>
+				<div class="col-auto">
+					<label for="resultado" >Resultado</label>
+					<input type="text" class="form-control" name="imc_resultado" id="resultado" th:field="*{resultado}" required>
+				</div>
+				<div class="col-1">
+					<label for="usuario_id">Id de usuario</label>
+					<input type="number" class="form-control" name="id_usuario" id="id_usuario" th:field="*{usuario.identificador}" required readonly>
+				</div>
+				<div class="col-auto">
+						<input type="submit" th:value="'Modificar'" class="btn btn-outline-light btn-lg btn-block mt-3" style="width:100%" />
+				</div>
+			</form>
+		</div>
 	</div>
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

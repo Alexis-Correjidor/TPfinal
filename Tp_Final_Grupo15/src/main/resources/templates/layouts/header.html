@@ -49,9 +49,18 @@
 				<li class="nav-item">
 						<a th:href="@{/contacto/formulario}" class="nav-link navestilo">Contactanos</a>
 					</li>
-				<li class="nav-item">
-						<a href="#" class="nav-link navestilo">Gestion de Datos</a>
-					</li>
+				<li class="nav-item dropdown">
+		          <a class="nav-link dropdown-toggle navestilo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		            Gestion de datos
+		          </a>
+		          <ul class="dropdown-menu">
+		            <li><a class="dropdown-item" th:href="@{/gestion/usuarios}">Usuarios</a></li>
+		            <li><a class="dropdown-item" th:href="@{/gestion/indices}">Indices de MC</a></li>
+		            <li><a class="dropdown-item" th:href="@{/gestion/recetas}">Recetas</a></li>
+		            <li><a class="dropdown-item" th:href="@{/gestion/ingredientes}">Ingredientes</a></li>
+		            <li><a class="dropdown-item" th:href="@{/gestion/testimonios}">Testimonios</a></li>
+		          </ul>
+		        </li>
 			</ul>
 			
 		</div>

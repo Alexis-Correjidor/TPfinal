@@ -85,8 +85,11 @@
 						<input class="form-control" type="date" id="nacimiento" name="usuario_nacimiento" th:field="*{fechaNacimiento}">
 						<div class="text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
 					</div> <p>
+					<div>
+						<input class="form-control" type="hidden" id="identificadpr" name="usuario_identificador" th:field="*{identificador}" readonly>
+					</div>
 					<div class="col-6 text-center mb-4">
-						<input type="submit" value="Registrarte" class="btn btn-success btn-lg btn-block mt-3" style="width:100%" />
+						<input type="submit" th:value="${editar} ? 'Modificar' : 'Registrarte'" class="btn btn-success btn-lg btn-block mt-3" style="width:100%" />
 					</div>
 				</div>
 			</form>
