@@ -51,10 +51,5 @@ public class ITestimonioServiceImp implements ITestimonioService {
 		return testimonio;
 	}
 
-	@Override
-	public Testimonio GetByusuario(Long id) {
-		
-		return testimonioRepository.findById(id).get();
-	}
 
 }

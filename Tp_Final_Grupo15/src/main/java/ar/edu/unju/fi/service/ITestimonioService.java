@@ -18,5 +18,4 @@ public interface ITestimonioService {
 	
 	Testimonio GetTestimonio();
 	
-	Testimonio GetByusuario(Long id);
 }
