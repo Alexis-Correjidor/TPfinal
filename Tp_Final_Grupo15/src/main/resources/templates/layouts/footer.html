@@ -30,19 +30,27 @@
 				<div class="col-xs-12 col-md-6 col-lg-3">
 					<h4 class="footer-title">Mapa del Sitio</h4>
 					<div class="mb-2">
-					<a class="text-white text-decoration-none" href="#">Inicio</a>
+					<a class="text-white text-decoration-none" th:href="@{/inicio}">Inicio</a>
 					</div>
 					<div class="mb-2">
-					<a class="text-white text-decoration-none" href="#">Servicios</a>
+					
+		           <a class="nav-link dropdown-toggle navestilo" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		            Servicios
+		           </a>
+		           <ul class="dropdown-menu">
+		             <li><a class="dropdown-item" th:href="@{/servicio/calcular_imc}">Calcular IMC</a></li>
+		             <li><a class="dropdown-item" th:href="@{/servicio/peso_ideal}">Peso Ideal</a></li>
+		           </ul>
+		        
 					</div>
 					<div class="mb-2">
-					<a class="text-white text-decoration-none" href="#">Recetas</a>
+					<a class="text-white text-decoration-none" th:href="@{/Receta}">Recetas</a>
 					</div>
 					<div class="mb-2">
-					<a class="text-white text-decoration-none" href="#">Testimonios</a>
+					<a class="text-white text-decoration-none" th:href="@{/testimonio/listado}">Testimonios</a>
 					</div>
 					<div class="mb-2">
-					<a class="text-white text-decoration-none" href="#">Registrarse</a>
+					<a class="text-white text-decoration-none" href="/registrarme/formulario">Registrarse</a>
 					</div>
 				</div>
 			</div>	
