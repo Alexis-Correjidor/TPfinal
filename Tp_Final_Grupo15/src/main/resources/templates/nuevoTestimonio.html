@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Inicio</title>
+		<title th:text="${edicion}?'Modificar Testimonio':'Nuevo Testimonio'"></title>
 		<link rel="stylesheet" type="text/css"
 		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/css/style.css}">
@@ -27,12 +27,16 @@
 				<div class="text-danger" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
 		</div>
 		<div class="col-auto">
-				<label for="id" class="visually-hidden">Nom</label>
+				<label for="id" class="visually-hidden">id</label>
 				<input type="hidden" class="form-control" name="testimonio_id" id="id" th:field="*{id}" readonly>
 		</div>
 		<div class="col-auto">
 				<label for="nombre" class="visually-hidden">Nom</label>
 				<input type="hidden" class="form-control" name="testimonio_nombre" id="nombre" th:field="*{nombre}" readonly>
+		</div>
+				<div class="col-auto">
+				<label for="nombre" class="visually-hidden">fecha</label>
+				<input type="hidden" class="form-control" name="testimonio_fechaComentario" id="fechaComentario" th:field="*{fechaComentario}" th:value="*{fechaComentario}" readonly>
 		</div>
 		<div class="col-auto">
 				<label for="identificador" class="visually-hidden">Identificador</label>

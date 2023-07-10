@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Nuevo Imc</title>
+		<title th:text="${editar}?'Modificar Imc':'Nuevo Imc'">Nuevo Imc</title>
 		<link rel="stylesheet" type="text/css"
 		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/css/style.css}">
@@ -13,8 +13,8 @@
 	<header th:replace="~{layouts/header :: header}"></header>
 	<div class="container text-white my-4">
 		<div class="text-center">
-			<h2 class="active">Nuevo Índice de masa corporal</h2>
-			<p>Ingrese su peso para calcular su Imc</p>
+			<h2 class="active" th:text="${editar}?'Modificar Indice de masa corporal':'Nuevo Índice de masa corporal'"></h2>
+			<p th:text="${editar}?'Modificar los datos de un registro Imc':'Ingrese su peso para calcular su Imc'"></p>
 		</div>
 		<div th:if="${editar}==false">
 			<form class="row g-3 justify-content-md-center" th:action="@{/servicio/calcular_imc/guardar}" th:object="${imc}" method="post">
