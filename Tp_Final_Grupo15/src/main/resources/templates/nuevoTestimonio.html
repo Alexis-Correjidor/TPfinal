@@ -22,7 +22,7 @@
 			    
 		</div>
 		<div class="form-floating mb-3 col-lg-6">
-				<textarea class="form-control"  id="comentario" th:field="*{comentario}" style="height: 100px"></textarea>
+				<textarea class="form-control"  id="comentario" th:field="*{comentario}" style="height: 100px" required></textarea>
 				<label for="comentario">Comentario</label>
 				<div class="text-danger" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
 		</div>
