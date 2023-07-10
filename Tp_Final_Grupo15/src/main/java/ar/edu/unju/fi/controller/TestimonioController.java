@@ -1,8 +1,11 @@
 package ar.edu.unju.fi.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Testimonio;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.ITestimonioService;
 import ar.edu.unju.fi.service.IUsuarioService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/testimonio")
@@ -50,8 +55,11 @@ public class TestimonioController {
 		else {
 			modelView.addObject("usuario", usuarioService.getById(identificador));
 			modelView.addObject("name", usuarioService.getById(identificador).getNombre());
-			
+			testimonio.setNombre(usuarioService.getById(identificador).getNombre());
 		}
+		Usuario usuario = usuarioService.getById(identificador);
+		
+		testimonio.setUsuario(usuario);
 		boolean edicion = false;
 		modelView.addObject("edicion", edicion);
 		modelView.addObject("testimonio", testimonioService.GetTestimonio());
@@ -59,23 +67,38 @@ public class TestimonioController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView getGuardarTestimonioPage(@ModelAttribute("testimonio")Testimonio testimonio) {
+	public ModelAndView getGuardarTestimonioPage(@Valid @ModelAttribute("testimonio")Testimonio testimonio, BindingResult result) {
 		ModelAndView modelView = new ModelAndView("testimonio");
+		if(result.hasErrors()) {
+			modelView.setViewName("nuevoTestimonio");
+			modelView.addObject("testimonio", testimonio);
+			return modelView;
+		}else {
+		testimonio.setFechaComentario(LocalDate.now());
+		testimonio.setUsuario(usuarioService.getById(testimonio.getUsuario().getIdentificador()));
 		testimonioService.guardar(testimonio);
 		modelView.addObject("testimonios", testimonioService.getLista());
+		}
 		return modelView;
+		
 	}
 	
 	@GetMapping("/modificar/{id}")
-	public String GetModificarTestomonioPage(Model model, @PathVariable(value="id") Long id){
+	public ModelAndView GetModificarTestomonioPage( @PathVariable(value="id") Long id){
+		ModelAndView modelView = new ModelAndView("nuevoTestimonio");
+		Testimonio testimonio;
 		boolean edicion = true;
-		model.addAttribute("testimonio", testimonioService.GetBy(id));
-		model.addAttribute("edicion", edicion);
-		return "nuevoTestimonio";
+		testimonio = testimonioService.GetBy(id);
+		modelView.addObject("testimonio", testimonio);
+		modelView.addObject("edicion", edicion);
+		return modelView;
 	}
 	
 	@PostMapping("/modificar")
-	public String ModificarTestimonio(@ModelAttribute("testimonio")Testimonio testimonio) {
+	public String ModificarTestimonio(@Valid @ModelAttribute("testimonio")Testimonio testimonio, BindingResult result) {
+		if(result.hasErrors()) {
+			return "nuevoTestimonio";
+		}
 		testimonioService.modificar(testimonio);
 		return "redirect:/testimonio/listado";
 	}
