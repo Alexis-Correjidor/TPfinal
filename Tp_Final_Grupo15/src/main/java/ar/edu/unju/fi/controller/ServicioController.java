@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,20 +77,28 @@ public class ServicioController {
 	    ModelAndView modelAndView = new ModelAndView("nuevo_imc");
 	    imc.setUsuario(usuario);  
 	    modelAndView.addObject("imc", imc);
+	    modelAndView.addObject("editar", false);
 	    return modelAndView;
 	}
 	
 	@PostMapping("/calcular_imc/guardar")
 	public ModelAndView getResultadoImcPage(@ModelAttribute(value = "imc") IndiceMasaCorporal imc,
 			@RequestParam("peso") double peso){
-	  
+	  ModelAndView modelAndView=new ModelAndView();
 	  imc.setUsuario(usuarioService.getById(imc.getUsuario().getIdentificador()));
 	  imc.setFechaIMC(LocalDate.now());
 	  imc.setPeso(peso);
+	  if(imc.getIdentificador()!=0)
+	  {
+		  imcService.guardar(imc);
+		  modelAndView.setViewName("redirect:/gestion/indices");
+		  return modelAndView;
+	  }
+	  else {
 	  imc.setResultado(imc.calcularImc(imc.getUsuario().getEstatura(), peso));
 	  imcService.guardar(imc);
-	  ModelAndView modelAndView=new ModelAndView("redirect:/servicio/imc_resultado?id="+imc.getIdentificador());
-	  return modelAndView;
+	  modelAndView.setViewName("redirect:/servicio/imc_resultado?id="+imc.getIdentificador());
+	  return modelAndView;}
 	}
 	
 	@GetMapping("/imc_resultado")
@@ -100,4 +109,31 @@ public class ServicioController {
 	    modelAndView.addObject("usuario",imc.getUsuario());
 	    return modelAndView;
 	}
+	
+    @GetMapping("/imc/modificar/{identificador}")
+    public ModelAndView getModifyIMCPage(
+            @PathVariable(value = "identificador") long identificador) {
+    	IndiceMasaCorporal imc;
+        ModelAndView modelAndView = new ModelAndView();
+        boolean edicion = true;
+
+        imc = imcService.getById(identificador);
+        modelAndView.setViewName("nuevo_imc");
+        modelAndView.addObject("imc", imc);
+        modelAndView.addObject("editar", edicion);
+
+        return modelAndView;
+    }
+    
+    @GetMapping("/imc/eliminar/{identificador}")
+    public ModelAndView deleteIMC(
+            @PathVariable(value = "identificador") long identificador) {
+            
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("redirect:/gestion/indices");
+        imcService.eliminar(imcService.getById(identificador));
+
+        return modelAndView;
+    }
 }

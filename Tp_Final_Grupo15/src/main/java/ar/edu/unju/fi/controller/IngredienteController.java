@@ -56,7 +56,7 @@ public class IngredienteController {
 	public ModelAndView getPageEditIngrediente(@PathVariable("id") Long id) {
 		unIngrediente = ingredienteService.findIngredienteById(id);
 		ModelAndView mav = new ModelAndView("nuevoIngrediente");
-		mav.addObject("ingrediente", unIngrediente);
+		mav.addObject("unIngrediente", unIngrediente);
 		return mav;
 	}
 }
