@@ -20,7 +20,7 @@
 	      <span th:text="${r.preparacion}"></span>
 	    </p>
 	    <ul>
-	      <li th:each="i: ${ingredientes}" th:text="${i.nombre}"></li>
+	      <li th:each="i: ${r.ingredientes}" th:text="${i.nombre}"></li>
 	    </ul>
 	    <a class="btn btn-warning"
 		th:hidden="${listar}?'hidden'" th:href="@{/receta/modificar/}+${r.id}">Modificar</a> <a

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -32,7 +32,7 @@ public class Ingrediente {
 	private String nombre;
 	@Column(name = "ing_estado")
 	private boolean estado;
-	@ManyToMany(mappedBy = "ingredientes")
+	@ManyToMany(mappedBy = "ingredientes", cascade = CascadeType.ALL)
 	private List<Receta> recetas ;
 
 	
