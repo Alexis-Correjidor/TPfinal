@@ -22,7 +22,7 @@ public class Testimonio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "testi_id")
-	private Long id;
+	private long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_identificador")
@@ -49,8 +49,6 @@ public class Testimonio {
 		this.comentario = comentario;
 		this.estado = estado;
 	}
-	
-	
 
 	public Long getId() {
 		return id;
@@ -60,12 +58,13 @@ public class Testimonio {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	public Usuario getUsuario(long identificador) {
+		usuario.getIdentificador();
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+		this.usuario= usuario;
 	}
 
 	public LocalDate getFechaComentario() {
@@ -92,6 +91,9 @@ public class Testimonio {
 		this.estado = estado;
 	}
 
+	public String getUsuarioName () {
+		return usuario.getNombre();
+	}
 	
 }
 
