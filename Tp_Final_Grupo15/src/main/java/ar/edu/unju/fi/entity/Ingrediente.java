@@ -1,18 +1,19 @@
 package ar.edu.unju.fi.entity;
 
-import java.util.List;
+
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Component
@@ -25,30 +26,40 @@ public class Ingrediente {
 	private Long id;
 	@Column(name = "ing_nombre")
 	private String nombre;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Receta> recetas;
+	@ManyToOne
+	@JoinColumn(name = "receta_id")
+	private Receta receta;
+	@Column(name = "ing_estado")
+	private boolean estado;
 	
 	public Ingrediente() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingrediente(Long id, String nombre, List<Receta> recetas) {
+	public Ingrediente(Long id, String nombre, Receta receta, boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.recetas = recetas;
+		this.receta = receta;
+		this.estado = estado;
 	}
 
 
-	public List<Receta> getRecetas() {
-		return recetas;
+	public boolean isEstado() {
+		return estado;
 	}
 
-
-	public void setRecetas(List<Receta> recetas) {
-		this.recetas = recetas;
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
+	public Receta getReceta() {
+		return receta;
+	}
+
+	public void setReceta(Receta receta) {
+		this.receta = receta;
+	}
 
 	public Long getId() {
 		return id;

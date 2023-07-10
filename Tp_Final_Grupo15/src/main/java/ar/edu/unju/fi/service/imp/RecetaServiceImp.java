@@ -30,17 +30,20 @@ public class RecetaServiceImp implements IRecetaService{
 
 	@Override
 	public void addReceta(Receta receta) {
+		receta.setEstado(true);
 		recetaRepository.save(receta);
 	}
 
 	@Override
 	public void modifyReceta(Receta receta) {
+		receta.setEstado(true);
 		recetaRepository.save(receta);
 	}
 
 	@Override
 	public void deleteReceta(Receta receta) {
-		recetaRepository.delete(receta);
+		receta.setEstado(false);
+		recetaRepository.save(receta);
 	}
 
 	@Override
@@ -50,8 +53,7 @@ public class RecetaServiceImp implements IRecetaService{
 
 	@Override
 	public List<Receta> getAllRecetas() {
-		List<Receta> recetas = (List<Receta>)recetaRepository.findAll();
-		return recetas;
+		return recetaRepository.findByEstado(true);
 	}
 
 }

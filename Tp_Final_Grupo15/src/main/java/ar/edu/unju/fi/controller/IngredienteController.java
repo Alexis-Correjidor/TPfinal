@@ -12,51 +12,51 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Ingrediente;
 import ar.edu.unju.fi.service.IIngredienteService;
-import ar.edu.unju.fi.service.IRecetaService;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/ingrediente")
 public class IngredienteController {
 	
 	@Autowired
 	private IIngredienteService ingredienteService;
-	
-	@Autowired
-	private IRecetaService recetaService;
-	
-	
+
 	@Autowired
 	private Ingrediente unIngrediente;
 	
-	@GetMapping("/ingrediente/formulario")
+	@GetMapping("/lista")
+	public ModelAndView getPageIngrediente() {
+		ModelAndView mav = new ModelAndView("listaIngredientes");
+		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
+		return mav;
+	}
+	
+	@GetMapping("/formulario")
 	public ModelAndView getPageFormIngrediente() {
 		unIngrediente = new Ingrediente();
 		ModelAndView mav = new ModelAndView("nuevoIngrediente");
 		mav.addObject("unIngrediente", unIngrediente);
-		mav.addObject("recetas", recetaService.getAllRecetas());
 		return mav;
 	}
 	
-	@PostMapping("/ingrediente/guardar")
+	@PostMapping("/guardar")
 	public ModelAndView getSaveIngredientePage(@Valid @ModelAttribute("unIngrediente") Ingrediente ingrediente, BindingResult result) {
 		ModelAndView mav;
 		if(result.hasErrors()) {
-			mav = new ModelAndView("unIngrediente");
-			mav.addObject("ingrediente", ingrediente);
-		}
+			mav = new ModelAndView("nuevoIngrediente");
+		}else {
 		ingredienteService.addIngrediente(ingrediente);
-		mav = new ModelAndView("receta");
-		mav.addObject("receta", ingredienteService.getAllIngredientes());
+		mav = new ModelAndView("listaIngredientes");
+		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
+		}
 		return mav;
 	}
 	
-	@GetMapping("/ingrediente/modificar/{id}")
+	@GetMapping("/modificar/{id}")
 	public ModelAndView getPageEditIngrediente(@PathVariable("id") Long id) {
 		unIngrediente = ingredienteService.findIngredienteById(id);
 		ModelAndView mav = new ModelAndView("nuevoIngrediente");
 		mav.addObject("ingrediente", unIngrediente);
-		mav.addObject("recetas", recetaService.getAllRecetas());
 		return mav;
 	}
 }
