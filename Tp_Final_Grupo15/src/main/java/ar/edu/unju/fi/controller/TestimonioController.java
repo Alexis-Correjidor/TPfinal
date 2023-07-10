@@ -99,7 +99,7 @@ public class TestimonioController {
 		if(result.hasErrors()) {
 			return "nuevoTestimonio";
 		}
-		testimonioService.modificar(testimonio);
+		testimonioService.guardar(testimonio);
 		return "redirect:/testimonio/listado";
 	}
 	

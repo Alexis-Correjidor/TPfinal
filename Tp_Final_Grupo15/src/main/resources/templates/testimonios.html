@@ -19,6 +19,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Comentario</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -26,6 +27,7 @@
                         <tr th:each="testi : ${testimonios}">
                             <th scope="row" th:text="${testi.id}"></th>
                             <td th:text="${testi.comentario}"></td>
+                            <td th:text="${testi.nombre}"></td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <a class="btn btn-sm btn-outline-primary text-decoration-none"

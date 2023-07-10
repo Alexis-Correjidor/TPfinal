@@ -13,10 +13,10 @@
 	<header th:replace="~{layouts/header :: header}"></header>
 	
 	<div class="container m-5">
-		<div th:if="${usuario}!=null">
+		<div th:if="${usuario}!=null or ${edicion}">
 		<p class="text-white">Cuentanos tu experiencia con nuestros servicios.</p>
 		<form th:action="${edicion}?@{/testimonio/modificar}:@{/testimonio/guardar}" th:object="${testimonio}" method="post">
-		<div class="col-sm-3 mb-3 col-lg-2">
+		<div th:if="${edicion}==false" class="col-sm-3 mb-3 col-lg-2">
 			    <label class="visually-hidden"  for="name">Nombre</label>
 			    <input type="text" class="form-control" id="name" th:placeholder="${name}" disabled>
 			    
@@ -25,6 +25,10 @@
 				<textarea class="form-control"  id="comentario" th:field="*{comentario}" style="height: 100px" required></textarea>
 				<label for="comentario">Comentario</label>
 				<div class="text-danger" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
+		</div>
+		<div class="col-auto">
+				<label for="id" class="visually-hidden">Nom</label>
+				<input type="hidden" class="form-control" name="testimonio_id" id="id" th:field="*{id}" readonly>
 		</div>
 		<div class="col-auto">
 				<label for="nombre" class="visually-hidden">Nom</label>
