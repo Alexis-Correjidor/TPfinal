@@ -18,7 +18,7 @@
 		<form th:action="${edicion}?@{/testimonio/modificar}:@{/testimonio/guardar}" th:object="${testimonio}" method="post">
 		<div class="col-sm-3 mb-3 col-lg-2">
 			    <label class="visually-hidden"  for="name">Nombre</label>
-			    <input type="text" class="form-control" id="name" th:placeholder="${usuario.nombre}" disabled>
+			    <input type="text" class="form-control" id="name" th:placeholder="${name}" disabled>
 			    
 		</div>
 		<div class="form-floating mb-3 col-lg-6">
