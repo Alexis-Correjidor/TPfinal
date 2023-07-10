@@ -24,7 +24,7 @@ public class Testimonio {
 	@Column(name = "testi_id")
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_identificador")
 	private Usuario usuario;
 	
@@ -59,11 +59,12 @@ public class Testimonio {
 	}
 
 	public Usuario getUsuario(long identificador) {
-		usuario.getIdentificador();
+		
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
+		
 		this.usuario= usuario;
 	}
 
@@ -91,9 +92,6 @@ public class Testimonio {
 		this.estado = estado;
 	}
 
-	public String getUsuarioName () {
-		return usuario.getNombre();
-	}
 	
 }
 

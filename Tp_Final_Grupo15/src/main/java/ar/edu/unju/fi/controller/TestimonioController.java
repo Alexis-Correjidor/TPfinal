@@ -43,12 +43,14 @@ public class TestimonioController {
 	@PostMapping("/nuevo")
 	public ModelAndView imonioPage(@RequestParam("identificador") int identificador) {
 		ModelAndView modelView = new ModelAndView("nuevoTestimonio");
+		
 		if(usuarioService.getById(identificador)==null) {
 			modelView.addObject("encontrado", false);
 		}
 		else {
 			modelView.addObject("usuario", usuarioService.getById(identificador));
-			modelView.addObject("idusu", usuarioService.getById(identificador));
+			modelView.addObject("name", usuarioService.getById(identificador).getNombre());
+			
 		}
 		boolean edicion = false;
 		modelView.addObject("edicion", edicion);
