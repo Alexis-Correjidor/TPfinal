@@ -32,7 +32,9 @@ public class ServicioController {
 	  }
 	  else
 	  {
+		  
 		  modelAndView.addObject("usuario", usuarioService.getById(identificador));
+		  modelAndView.addObject("edad", usuarioService.getById(identificador).getEdad());
 		  modelAndView.addObject("peso_ideal", usuarioService.getById(identificador).getPesoIdeal());
 	  }
 	  return modelAndView;
