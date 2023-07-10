@@ -30,7 +30,16 @@ public class UsuarioServiceImp implements IUsuarioService {
 	@Override
 	public Usuario getById(long identificador) {
 	    Optional<Usuario> optionalUsuario = usuarioRepository.findById(identificador);
-	    return optionalUsuario.orElse(null);
+	    
+	    if (optionalUsuario.isPresent()) { 
+	        Usuario usuario = optionalUsuario.get();
+	        
+	        if (usuario.isEstado()) { 
+	            return usuario;
+	        }
+	    }
+	    
+	    return null; // se devuelve null si el usuario no existe o su estado es false
 	}
 
 	@Override

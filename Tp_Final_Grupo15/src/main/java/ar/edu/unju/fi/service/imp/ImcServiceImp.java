@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
-
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +52,16 @@ public class ImcServiceImp implements IImcService {
 
 	@Override
 	public List<IndiceMasaCorporal> getbyUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return imcRepository.findByUsuario(usuario);
+	    List<IndiceMasaCorporal> allIndiceMasaCorporal = imcRepository.findByUsuario(usuario);
+	    List<IndiceMasaCorporal> filteredList = new ArrayList<>();
+
+	    for (IndiceMasaCorporal imc : allIndiceMasaCorporal) {
+	        if (imc.isEstado()) {  //se filtra agregando a la lista filtrada solo los imc con estado true
+	            filteredList.add(imc); 
+	        }
+	    }
+
+	    return filteredList;
 	}
 
 }

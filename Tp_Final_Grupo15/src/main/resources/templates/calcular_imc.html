@@ -14,8 +14,10 @@
 	<header th:replace="~{layouts/header :: header}"></header>
 		
 		<div class="container my-4">
-			<div class="text-center">
+			<div class="text-center text-white">
 					<h2 class="active">Índice de masa corporal</h2>
+					<p>El cálculo del índice de masa corporal es una herramienta para evaluar la relación entre la masa y la estatura de un individuo, proporcionando una estimación general de su estructura física y asistiendo en la determinación de si se encuentra en un intervalo de peso saludable. No obstante, es crucial tener en cuenta otros aspectos y llevar a cabo evaluaciones más exhaustivas para obtener una visión más precisa de la salud y el bienestar de una persona.</p>
+					<h2 class="active">Calculo de Índice de masa corporal</h2>
 					<p class="text-white">Para calcular índice de masa corporal según su estatura y peso, debe ingresar su codigo de usuario:</p>
 					<form class="row g-3 justify-content-md-center" th:action="@{/servicio/calcular_imc}" method="post">
 					  <div class="col-auto">
