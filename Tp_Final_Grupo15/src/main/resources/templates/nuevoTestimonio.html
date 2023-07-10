@@ -24,10 +24,24 @@
 		<div class="form-floating mb-3 col-lg-6">
 				<textarea class="form-control"  id="comentario" th:field="*{comentario}" style="height: 100px"></textarea>
 				<label for="comentario">Comentario</label>
+				<div class="text-danger" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
+		</div>
+		<div class="col-auto">
+				<label for="nombre" class="visually-hidden">Nom</label>
+				<input type="hidden" class="form-control" name="testimonio_nombre" id="nombre" th:field="*{nombre}" readonly>
+		</div>
+		<div class="col-auto">
+				<label for="identificador" class="visually-hidden">Identificador</label>
+				<input type="hidden" class="form-control" name="usuario_identificador" id="identificador" th:field="*{usuario.identificador}" readonly>
 		</div>
     	<button type="submit" class="btn btn-outline-light mb-3" th:text="${edicion}?'Modificar Comentario':'Agregar Comentario'"></button>
     	</form>
 		</div>
+		<div class="text-center" th:if="${encontrado}==false">
+				<h4 class="active">Lo sentimos, no se encontró un usuario con el codigo de usuario ingresado</h4>
+				<h4 class="active">Debe dirigirse a  <a class="active" href="/registrarme/formulario">Registrame</a> </h4>
+		</div>
+		
 	</div>
 	
 	<footer th:replace="~{layouts/footer :: footer}"></footer>	

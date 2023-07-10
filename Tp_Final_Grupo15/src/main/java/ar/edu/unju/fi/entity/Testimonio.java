@@ -14,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Component
 @Entity
@@ -31,9 +33,13 @@ public class Testimonio {
 	@Column(name = "testi_fechaComent")
 	private LocalDate fechaComentario;
 	
+	
+	@NotEmpty(message="Este campo no debe estar vacio")
 	@Column(name = "testi_comentario")
 	private String comentario;
 
+	private String nombre;
+	
 	@Column(name = "testi_estado")
 	private boolean estado;
 	
@@ -41,13 +47,14 @@ public class Testimonio {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Testimonio(Long id, Usuario usuario, LocalDate fechaComentario, String comentario, boolean estado) {
+	public Testimonio(Long id, Usuario usuario, LocalDate fechaComentario, String comentario, boolean estado, String nombre) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.fechaComentario = fechaComentario;
 		this.comentario = comentario;
 		this.estado = estado;
+		this.nombre = nombre;
 	}
 
 	public Long getId() {
@@ -58,7 +65,7 @@ public class Testimonio {
 		this.id = id;
 	}
 
-	public Usuario getUsuario(long identificador) {
+	public Usuario getUsuario() {
 		
 		return usuario;
 	}
@@ -90,6 +97,14 @@ public class Testimonio {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	
