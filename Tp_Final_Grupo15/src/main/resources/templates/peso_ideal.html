@@ -13,9 +13,14 @@
     
 	<header th:replace="~{layouts/header :: header}"></header>
 		
-		<div class="container">
+		<div class="container" id="pesoIdeal">
 			<div class="text-center">
 					<h2 class="active">Peso ideal</h2>
+					<p class="text-white">Todas las personas no somos iguales, lo que significa que el cálculo de nuestro peso ideal va a variar tanto de nuestro estilo de vida como de nuestra genética. Además de la edad, el sexo y la estatura, el cálculo del peso ideal debe incorporar otros aspectos igual de importantes
+                	En otras palabras, calcular el peso ideal no es lo mismo que calcular el peso apropiado para un tipo de cuerpo en especial, aunque puede servir como guía</p>
+					
+					<h2 class="active">Calculo de su Peso Ideal</h2>
+					
 					<p class="text-white">Para calcular su peso ideal según su estatura y edad, debe ingresar su codigo de usuario:</p>
 					<form class="row g-3 justify-content-md-center" th:action="@{/servicio/peso_ideal}" method="post">
 					  <div class="col-auto">
@@ -26,22 +31,27 @@
 					<button type="submit" class="btn btn-outline-light mb-3">Confirmar Identidad</button>
 					</div>
 					</form>
+					
 					<div th:if="${usuario}!=null">
 						<h3 class="active" ></h3>
 						<div  class="bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"
 							  style="background-image: url('/images/peso_ideal.png'); background-position: center;
 							  background-size: cover;">
 							  <h1 class="mb-3 h2" th:text="'¡Hola,'+'  '+${usuario.apellido}+'  '+${usuario.nombre}+'!'"></h1>
-							
+							  <h5 th:text="'Altura : '+${usuario.estatura}+' m'"></h5>
+							  <h5 th:text="'Edad : '+${edad}+' años'"></h5>
 							  <h4 th:text="'Tu peso ideal es de: '+${peso_ideal}+' kg'"></h4>
 							  <p>
 							  	Recuerde, el camino para una vida saludable es un proceso gradual. Cada pequeño paso que das cuenta y te acerca a tu objetivo.
 							  </p>
 						</div>
 					</div>
+					
 					<div th:if="${encontrado}==false">
-						<h3 class="active">Lo sentimos, no se encontró un usuario con el codigo de usuario ingresado</h3>
+						<h4 class="active">Lo sentimos, no se encontró un usuario con el codigo de usuario ingresado</h4>
+						<h4 class="active">Debe dirigirse a  <a class="active" href="/registrarme/formulario">Registrame</a> </h4>
 					</div>
+					
 			</div>	
 		</div>
 		
