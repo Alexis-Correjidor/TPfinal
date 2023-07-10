@@ -1,7 +1,6 @@
 package ar.edu.unju.fi.controller;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,24 +44,37 @@ public class RecetaController {
 	@Autowired 
 	Ingrediente unIngrediente;
 	
-	@GetMapping("/receta")
-	public String getRecetaPage() {
-		return "receta";
+	@GetMapping("/Receta")
+	public ModelAndView getRecetaPage() {
+		ModelAndView mav = new ModelAndView("receta");
+		mav.addObject("recetas",recetaService.getAllRecetas());
+		return mav;
 	}
 	
 	@GetMapping("/receta/lista")
 	public ModelAndView getPageRecetas() {
 		ModelAndView mav = new ModelAndView("listaRecetas");
-		mav.addObject("recetas", recetaService.getList(getRecetaPage()));
+		mav.addObject("recetas", recetaService.getAllRecetas());
+		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
 		return mav;
 	}
+	
+	@GetMapping("/receta/{categoria}")
+	public ModelAndView getPageRecetasByCategoria(@PathVariable("categoria")String categoria) {
+		boolean listar=true;
+		List<Receta> recetas = recetaService.getList(categoria);
+		ModelAndView mav = new ModelAndView("listaRecetas");
+		mav.addObject("recetas", recetas);
+		mav.addObject("listar", listar);
+		return mav;
+	}
+	
 	
 	@GetMapping("/receta/formulario")
 	public ModelAndView getPageFormReceta() {
 		unaReceta = new Receta();
 		ModelAndView mav = new ModelAndView("nuevaReceta");
 		mav.addObject("unaReceta", unaReceta);
-		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
 		return mav;
 	}
 	
@@ -75,14 +87,8 @@ BindingResult result,
 			mav = new ModelAndView("nuevaReceta");
 			mav.addObject("receta", receta);
 		}else {
-			List<Ingrediente> listaIngredientes = new ArrayList<>();
-			for(Ingrediente ingrediente : receta.getIngredientes()) {
-				unIngrediente = ingredienteService.findIngredienteById(ingrediente.getId());
-				listaIngredientes.add(unIngrediente);
-			}
-			
-			receta.setIngredientes(listaIngredientes);
-			if(receta.getId() > 0) {
+		
+			if(receta.getId() != null) {
 				unaReceta = recetaService.getRecetaById(receta.getId());
 				if(!image.isEmpty()) {
 					if(unaReceta.getImagen() != null && unaReceta.getImagen().length() > 0){
@@ -118,7 +124,12 @@ BindingResult result,
 		return mav;
 	}
 	
-	
+	@GetMapping("/receta/eliminar/{id}")
+	public String getPageDeleteReceta(@PathVariable("id") Long id) {
+		unaReceta = recetaService.getRecetaById(id);
+		recetaService.deleteReceta(unaReceta);
+		return "redirect:/receta/lista";
+	}
 	
 	@GetMapping("/uploads/{filename}")
 	public ResponseEntity<Resource> goImage(@PathVariable String filename){

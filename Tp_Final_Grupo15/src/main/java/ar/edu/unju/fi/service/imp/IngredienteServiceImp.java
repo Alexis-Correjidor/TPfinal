@@ -20,8 +20,7 @@ public class IngredienteServiceImp implements IIngredienteService{
 	
 	@Override
 	public List<Ingrediente> getAllIngredientes() {
-		List<Ingrediente> ingredientes = (List<Ingrediente>)ingredienteRepository.findAll();
-		return ingredientes;
+		return ingredienteRepository.findByEstado(true);
 	}
 
 	@Override
@@ -36,20 +35,22 @@ public class IngredienteServiceImp implements IIngredienteService{
 
 	@Override
 	public void addIngrediente(Ingrediente ingrediente) {
+		ingrediente.setEstado(true);
 		ingredienteRepository.save(ingrediente);
 		
 	}
 
 	@Override
 	public void modifyIngrediente(Ingrediente ingrediente) {
+		ingrediente.setEstado(true);
 		ingredienteRepository.save(ingrediente);
 		
 	}
 
 	@Override
 	public void deleteIngrediente(Ingrediente ingrediente) {
-		
-		
+		ingrediente.setEstado(false);
+		ingredienteRepository.save(ingrediente);
 	}
 
 }

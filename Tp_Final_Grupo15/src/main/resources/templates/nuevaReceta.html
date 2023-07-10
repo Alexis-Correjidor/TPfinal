@@ -15,41 +15,36 @@
 		<div class="text-center">
 			<h2 class="active">Formulario</h2>
 		</div>
-			<form th:action="@{/receta/formulario}" th:object="${unaReceta}" method="post">
+			<form th:action="@{/receta/guardar}" th:object="${unaReceta}" method="post" enctype="multipart/form-data">
 				<div class="row justify-content-center">
 					<div class="col-3">
+						<input type="hidden" class="form-control" id="id" th:field="*{id}">
+					</div><p>
+					<div class="col-3">
 						<label class="col-form-label" for="nombre">Nombre</label>
-						<input class="form-control" type="text" id="nombre" name="usuario_nombre" th:field="*{nombre}">
+						<input autocomplete="off" class="form-control" type="text" id="nombre" name="usuario_nombre" th:field="*{nombre}">
 						<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 					</div>
 					<div class="col-3">
-						<label class="col-form-label" for="id">ID</label>
-						<input class="form-control" type="text" id="id" name="receta_id" th:field="*{id}">
-						<div class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
-					</div> <p>
-					<div class="col-3">
-						<label class="col-form-label" for="imagen">Imagen</label>
-						<input class="form-control" type="text" id="imagen" name="ingrediente_imagen" th:field="*{imagen}">
-						<div class="text-danger" th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}"></div>
-					</div> 
+						<label for="file" class=form-label>Imagen de receta</label>
+						<input type="file" name="file" id="file" class="form-control"
+						 th:text="${unaReceta.imagen}"/> <br>
+					</div><p>
 					<div class="col-3">
 						<label class="col-form-label" for="preparacion">Preparacion</label>
-						<input class="form-control" type="text" id="preparacion" name="receta_preparacion" th:field="*{preparacion}">
+						<input autocomplete="off" class="form-control" type="text" id="preparacion" name="receta_preparacion" th:field="*{preparacion}">
 						<div class="text-danger" th:if="${#fields.hasErrors('preparacion')}" th:errors="*{preparacion}"></div>
-					</div><p>
-					<div class="col-6">
+					</div>
+					<div class="col-3">
 						<label class="col-form-label" for="categoria">Categoria</label>
 						<select id="categoria" class="form-select" name="receta_categoria" aria-label="Default select-example" th:field="*{categoria}">
 							<option selected value="">Seleccione categoria</option>
-							<option value="Carnes">Recetas de Carnes</option>
-							<option value="Bebidas">Recetas de Bebidas</option>
-							<option value="Dulces">Recetas de Dulces</option>
-							<option value="Ensaladas">Recetas de Ensaladas</option>
-							<option value="Legumbre_Cereales">Recetas de Legumbres y Cereales</option>
-							<option value="Pescados">Recetas de Pescados</option>
-							<option value="Pan">Recetas de Pan</option>
-							<option value="Sopas_Cremas">Recetas de Sopas y Cremas</option>
-							
+							<option value="Carnes">Carnes</option>
+							<option value="Ensaladas">Ensaladas</option>
+							<option value="Legumbre_Cereales">Legumbres y Cereales</option>
+							<option value="Croquetas">Croquetas</option>
+							<option value="Pan">Pan</option>
+							<option value="Arroces">Arroz</option>
 						</select>
 						<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
 					</div><p>
