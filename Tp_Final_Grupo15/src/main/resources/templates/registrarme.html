@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Registrar Usuario</title>
+		<title th:text="${editar}?'Modificar Usuario':'Registrar Usuario'"></title>
 		<link rel="stylesheet" type="text/css"
 		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 		<link rel="stylesheet" th:href="@{/css/style.css}">
@@ -13,8 +13,8 @@
 	<header th:replace="~{layouts/header :: header}"></header>
 	<div class="container text-white">
 		<div class="text-center">
-			<h2 class="active">Registrate</h2>
-			<p>Registrandote podras acceder a los distintos servicios que ofrece nuestra página</p>
+			<h2 class="active" th:text="${editar}?'Modificar Usuario':'Registrate'">Registrate</h2>
+			<p th:text="${editar}?'Cambia los valores del usuario':'Registrandote podras acceder a los distintos servicios que ofrece nuestra página'"></p>
 		</div>
 				<form th:action="@{/registrarme/guardar}" th:object="${usuario}" method="post">
 					<div class="row justify-content-center">
