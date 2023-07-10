@@ -7,11 +7,14 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 @Component
 @Entity
 @Table(name="recetas")
@@ -20,18 +23,23 @@ public class Receta {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "rec_id")
 	private Long id;
+	@Column(name = "rec_estado")
+	private boolean estado;
+	@NotBlank(message = "Debe ingresar nombre de receta")
 	@Column(name = "rec_nombre")
 	private String nombre;
+	@NotEmpty(message = "Debe seleccionar una categoria")
 	@Column(name = "rec_categoria")
 	private String categoria;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "receta")
+	@NotEmpty(message = "Debe seleccionar los ingredientes")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Ingrediente> ingredientes;
+	@NotBlank(message = "Debe ingresar preparacion de receta")
 	@Column(name = "rec_preparacion")
 	private String preparacion;
 	@Column(name = "rec_imagen")
 	private String imagen;
-	@Column(name = "rec_estado")
-	private boolean estado;
+	
 	
 	public Receta() {
 		// TODO Auto-generated constructor stub

@@ -11,7 +11,7 @@
 	</head>
 <body>
 	<header th:replace="~{layouts/header :: header}"></header>
-	<a th:hidden="${listar}?'hidden'" th:href="@{/receta/formulario}">Nueva receta</a>	
+	<a class="btn btn-sm btn-primary text-decoration-none text-center" th:hidden="${listar}?'hidden'" th:href="@{/receta/formulario}">Nueva receta</a>	
 	<div class="d-flex flex-wrap justify-content-center">	
 	  <div class="col-3 mb-4" th:each="r: ${recetas}">
 	    <h3 th:text="${r.nombre}"></h3>

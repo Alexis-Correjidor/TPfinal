@@ -26,7 +26,7 @@ public class IngredienteController {
 	
 	@GetMapping("/lista")
 	public ModelAndView getPageIngrediente() {
-		ModelAndView mav = new ModelAndView("listaIngredientes");
+		ModelAndView mav = new ModelAndView("ingredientes");
 		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
 		return mav;
 	}
@@ -46,7 +46,7 @@ public class IngredienteController {
 			mav = new ModelAndView("nuevoIngrediente");
 		}else {
 		ingredienteService.addIngrediente(ingrediente);
-		mav = new ModelAndView("listaIngredientes");
+		mav = new ModelAndView("ingredientes");
 		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
 		}
 		return mav;
@@ -58,5 +58,12 @@ public class IngredienteController {
 		ModelAndView mav = new ModelAndView("nuevoIngrediente");
 		mav.addObject("unIngrediente", unIngrediente);
 		return mav;
+	}
+	
+	@GetMapping("/eliminar/{id}")
+	public String getPageDeleteIngrediente(@PathVariable("id") Long id) {
+		unIngrediente = ingredienteService.findIngredienteById(id);
+		ingredienteService.deleteIngrediente(unIngrediente);
+		return "redirect:/ingrediente/lista";
 	}
 }

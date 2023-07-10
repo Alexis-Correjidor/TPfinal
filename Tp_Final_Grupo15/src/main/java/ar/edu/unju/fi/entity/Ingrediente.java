@@ -2,6 +2,8 @@ package ar.edu.unju.fi.entity;
 
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 
@@ -11,10 +13,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+
 
 @Component
 @Entity
@@ -25,25 +28,34 @@ public class Ingrediente {
 	@Column(name = "ing_id")
 	private Long id;
 	@Column(name = "ing_nombre")
+	@NotBlank
 	private String nombre;
-	@ManyToOne
-	@JoinColumn(name = "receta_id")
-	private Receta receta;
 	@Column(name = "ing_estado")
 	private boolean estado;
+	@ManyToMany(mappedBy = "ingredientes")
+	private List<Receta> recetas ;
+
 	
 	public Ingrediente() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ingrediente(Long id, String nombre, Receta receta, boolean estado) {
+	public Ingrediente(Long id, String nombre, List<Receta> recetas, boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.receta = receta;
+		this.recetas = recetas;
 		this.estado = estado;
 	}
 
+	
+	public List<Receta> getRecetas() {
+		return recetas;
+	}
+
+	public void setRecetas(List<Receta> recetas) {
+		this.recetas = recetas;
+	}
 
 	public boolean isEstado() {
 		return estado;
@@ -53,13 +65,6 @@ public class Ingrediente {
 		this.estado = estado;
 	}
 
-	public Receta getReceta() {
-		return receta;
-	}
-
-	public void setReceta(Receta receta) {
-		this.receta = receta;
-	}
 
 	public Long getId() {
 		return id;

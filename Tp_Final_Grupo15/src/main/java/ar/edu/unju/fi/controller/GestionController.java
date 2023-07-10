@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.service.IImcService;
 import ar.edu.unju.fi.service.IIngredienteService;
@@ -44,10 +45,12 @@ public class GestionController {
 	}
 	
 	@GetMapping("/recetas")
-	public String getRecetasPage(Model model) {
-		model.addAttribute("recetas",recetaService.getAllRecetas());
-		return "recetas";
-	}	
+	public ModelAndView getPageRecetas() {
+		ModelAndView mav = new ModelAndView("listaRecetas");
+		mav.addObject("recetas", recetaService.getAllRecetas());
+		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
+		return mav;
+	}
 	
 	@GetMapping("/ingredientes")
 	public String getIngredientesPage(Model model) {

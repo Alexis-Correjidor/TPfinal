@@ -28,12 +28,15 @@
 					<div class="col-3">
 						<label for="file" class=form-label>Imagen de receta</label>
 						<input type="file" name="file" id="file" class="form-control"
-						 th:text="${unaReceta.imagen}"/> <br>
+						 th:text="${unaReceta.imagen}"/>
 					</div><p>
 					<div class="col-3">
-						<label class="col-form-label" for="preparacion">Preparacion</label>
-						<input autocomplete="off" class="form-control" type="text" id="preparacion" name="receta_preparacion" th:field="*{preparacion}">
-						<div class="text-danger" th:if="${#fields.hasErrors('preparacion')}" th:errors="*{preparacion}"></div>
+						<label for="ingrediente" class="col-form-label">Ingredientes</label>
+						<select id="ingrediente" class=form-select name="receta_ingrediente" aria-label="Default select-example" th:field="*{ingredientes}" multiple>
+							<option th:each="i: ${ingredientes}" th:value=${i.id}
+							th:text="${i.nombre}"></option>
+						</select>
+						<div class="text-danger" th:if="${#fields.hasErrors('ingredientes')}" th:errors="*{ingredientes}"></div>
 					</div>
 					<div class="col-3">
 						<label class="col-form-label" for="categoria">Categoria</label>
@@ -41,12 +44,17 @@
 							<option selected value="">Seleccione categoria</option>
 							<option value="Carnes">Carnes</option>
 							<option value="Ensaladas">Ensaladas</option>
-							<option value="Legumbre_Cereales">Legumbres y Cereales</option>
+							<option value="Legumbres_Cereales">Legumbres y Cereales</option>
 							<option value="Croquetas">Croquetas</option>
 							<option value="Pan">Pan</option>
 							<option value="Arroces">Arroz</option>
 						</select>
 						<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+					</div><p>
+					<div class="col-6">
+						<label class="col-form-label" for="preparacion">Preparacion</label>
+						<textarea autocomplete="off" class="form-control" id="preparacion" name="receta_preparacion" th:field="*{preparacion}"></textarea>
+						<div class="text-danger" th:if="${#fields.hasErrors('preparacion')}" th:errors="*{preparacion}"></div>
 					</div><p>
 					<div class="col-6 text-center mb-4">
 						<input type="submit" value="Guardar" class="btn btn-success btn-lg btn-block mt-3" style="width:100%" />
