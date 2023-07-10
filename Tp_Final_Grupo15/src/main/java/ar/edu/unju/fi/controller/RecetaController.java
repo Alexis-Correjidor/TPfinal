@@ -75,6 +75,7 @@ public class RecetaController {
 		unaReceta = new Receta();
 		ModelAndView mav = new ModelAndView("nuevaReceta");
 		mav.addObject("unaReceta", unaReceta);
+		mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
 		return mav;
 	}
 	
@@ -86,6 +87,7 @@ BindingResult result,
 		if(result.hasErrors()) {
 			mav = new ModelAndView("nuevaReceta");
 			mav.addObject("receta", receta);
+			mav.addObject("ingredientes", ingredienteService.getAllIngredientes());
 		}else {
 		
 			if(receta.getId() != null) {
