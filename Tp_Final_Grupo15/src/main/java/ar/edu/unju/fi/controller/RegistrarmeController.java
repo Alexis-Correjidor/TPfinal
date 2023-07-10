@@ -23,7 +23,7 @@ public class RegistrarmeController {
 	IUsuarioService usuarioService;
 	
 	@GetMapping("/formulario")
-	private String getRegistrarmePage(Model model) {
+	public String getRegistrarmePage(Model model) {
 		model.addAttribute("usuario",usuarioService.getUsuario());
 		return "registrarme";
 	}
@@ -46,7 +46,7 @@ public class RegistrarmeController {
 	}
 	
 	@GetMapping("/usuarioregistrado")
-	private ModelAndView getRegistradoPage(@RequestParam("id") long id) {
+	public ModelAndView getRegistradoPage(@RequestParam("id") long id) {
 	    Usuario usuario = usuarioService.getById(id);
 
 	    ModelAndView modelAndView = new ModelAndView("registrado");
